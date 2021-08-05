@@ -1,1 +1,3 @@
-/home/dar729/.Xresources
+*.font:	Ubuntu Mono:pixelsize=19:antialias=true:autohint=true;
+! *.font:	Hack:pixelsize=16;
+*.alpha: 0.9
