@@ -1,0 +1,3 @@
+#!/bin/sh
+xbacklight -dec 4
+dunstify --replace=2 "Brightness: $(xbacklight -get)";

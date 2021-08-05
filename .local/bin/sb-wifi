@@ -1,1 +1,24 @@
-/home/dar729/.local/bin/sb-wifi
+#!/bin/sh
+
+icon=""
+# essid=`iwgetid wlp4s0: --raw`
+essid=`iwgetid wlp4s0 --raw`
+signal=`awk 'NR==3 {printf("%.0f%%",$3*10/7)}' /proc/net/wireless`
+
+if [ -z "$essid" ]; then
+	icon="睊"
+	essid="no wifi"
+	signal=""
+fi
+
+echo "$icon"
+#
+# case $1 in
+#     1) dunstify --replace=1 "$essid $signal" "Right click to open nmtui" -t 3000;;
+#     # 2) dunstify --replace=1 "$(nm-online)" -t 2000;;
+#     2) nm-connection-editor;;
+#     3) st -e nmtui;;
+# esac
+
+# 睊  直 
+

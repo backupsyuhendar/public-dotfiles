@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+const dirFile 			= '~/Gambar/scrot/'
+const w					= new Date() 
+const original_file     = `${w.getFullYear()}-${w.getMonth()}-${w.getDate()}-${w.getTime()}`
+//const arget_file        = original_file.split('').insert(-5, 'X').join
+const color_profile     = '/usr/share/color/icc/colord/sRGB.icc'
+const border_size       = '1'
+const background_color  = '"#FFFFFF"'
+const background_size   = '10'
+const shadow_size       = '50x10+0+10'
+const font              = 'Noto-Sans-Mono'
+const font_size         = '11'
+const color_fg          = '#ffffff'
+const color_bg          = '#666666'
+const author_position   = ['SouthWest', '+30+26']
+const author            = 'Shooter: @ syuhendar729'
+
+const execSync = require('child_process').execSync;
+// import { execSync } from 'child_process';  // replace ^ if using ES modules
+// const output = execSync('scrot', { encoding: 'utf-8' });  // the default is 'buffer'
+// console.log('Output was:\n', output);
+
+console.log(original_file)
+
+execSync(`
+scrot -e 'mv $f ${dirFile}$f'; dunstify --replace=3 'Screenshot disimpan di ${dirFile}'; \
+paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga;
+`, { encoding: 'utf-8' }); 

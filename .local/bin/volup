@@ -1,0 +1,5 @@
+#!/bin/sh
+pactl set-sink-volume 0 +5%; pkill -RTMIN+10 dwmblocks;
+dunstify  --icon=/usr/share/icons/Papirus/22x22/panel/audio-volume-high.svg " $(pamixer --get-volume-human)" -h int:value:$(pamixer --get-volume-human) -r 1 -t 1000;
+paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga;
+

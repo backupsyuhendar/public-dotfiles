@@ -1,1 +1,9 @@
-/home/dar729/.local/bin/sb-temp
+#!/bin/sh
+echo "$(cat /sys/class/thermal/thermal_zone0/temp | cut -b -2)糖"
+
+# case $1 in
+#     1) dunstify --replace=1 "🖥 CPU hogs" "$(ps axch -o cmd:15,%cpu --sort=-%cpu | head)\\n(100% per core)" -t 3000;;
+# esac
+
+# °C
+

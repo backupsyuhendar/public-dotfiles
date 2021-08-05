@@ -1,1 +1,18 @@
-/home/dar729/.local/bin/sb-vol
+#!/bin/sh
+# echo "$(pamixer --get-volume-human)"
+volstat="$(amixer get Master)"
+
+echo "$volstat" | grep "\[off\]" >/dev/null && printf "婢\\n" && exit
+
+vol=$(echo "$volstat" | grep -o "\[[0-9]\+%\]" | sed "s/[^0-9]*//g;1q")
+
+if [ "$vol" -gt "70"  ]; then
+		icon="$vol%"
+elif [ "$vol" -lt "30"  ]; then
+	icon="$vol%"
+else
+	icon="墳$vol%"
+fi
+
+echo "$icon"
+

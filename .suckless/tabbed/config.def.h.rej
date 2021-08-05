@@ -1,0 +1,11 @@
+--- config.def.h	2014-01-21 10:22:03.000000000 -0800
++++ config.def.h	2021-03-30 20:23:45.752478278 -0700
+@@ -10,7 +10,7 @@ static const char before[]      = "<";
+ static const char after[]       = ">";
+ static const int  tabwidth      = 200;
+ static const Bool foreground    = True;
+-
++static const int barHeight	= 24;
+ /*
+  * Where to place a new tab when it is opened. When npisrelative is True,
+  * then the current position is changed + newposition. If npisrelative

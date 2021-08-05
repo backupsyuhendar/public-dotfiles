@@ -1,1 +1,8 @@
-/home/dar729/.local/bin/pacman-size
+#!/bin/bash
+
+echo "Nama paket yang ingin dicari : "; 
+read namapaket
+
+expac -S -H M '%k\t%n' $namapaket
+
+

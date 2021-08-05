@@ -1,1 +1,10 @@
-/home/dar729/.local/bin/sb-date
+#!/bin/sh
+# echo "$(date +'%a %T %d-%m-%Y')"
+echo "$(date +'%a,%d%b %R')"
+# echo "$(date +'%R')"
+
+case $1 in
+    1) dunstify --replace=1 "  $(date)" -t 3000;;
+esac
+
+

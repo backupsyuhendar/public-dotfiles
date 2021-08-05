@@ -1,1 +1,8 @@
-/home/dar729/.local/bin/scrot-delay
+#!/bin/sh
+
+dirFile='~/Gambar/scrot/'
+dunstify --replace=3 -t 1000 "Tunggu 3 detik";
+scrot -d 3 -e 'mv $f ~/Gambar/scrot/$f && xclip -t image/png ~/Gambar/scrot/$f -sel clip';
+dunstify --replace=3 "Screenshot disimpan di $dirFile";
+paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga;
+

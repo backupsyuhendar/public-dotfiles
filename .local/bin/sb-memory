@@ -1,1 +1,22 @@
-/home/dar729/.local/bin/sb-memory
+#!/bin/sh
+
+# memory=$(free -m | grep '^Mem' | awk '{print $3"/"$2"MB"}')
+used=$(free -m | grep '^Mem' | awk '{print $3}')
+shared=$(free -m | grep '^Mem' | awk '{print $5}')
+memory=$(($used + $shared))
+# memory=$(inxi | grep "^Mem" | awk '{print $2}')
+# memTot=$(free -m | grep '^Mem' | awk '{print $2}')
+# memUsage=$(free -m | grep '^Mem' | awk '{print $3}')
+echo "﬙$memory""MB"
+# mem_total=$(free -m | awk 'NR%2==0 {print $2}')
+# mem_avail=$(free -m | awk 'NR%2==0 {print $7}')
+# mem_used=$(( $mem_total - $mem_avail ))
+# mem_usage=$(( $mem_used * 100 / $mem_total  ))
+# echo "$mem_usage%"
+# echo "﬙$mem_usage%"
+
+case $1 in
+	# 1) dunstify "CPU usage" "$(ps axch -o cmd,%cpu --sort=-%cpu | head)" ;;
+	1) dunstify --replace=1 "Memory: $memory" "Usage: $memUsage MB \nAvaileble: $(($memTot - $memUsage)) MB" -t 3000;;
+	3) st -e htop ;;
+esac

@@ -1,0 +1,235 @@
+" An example for a vimrc file.
+"
+" Maintainer:	Bram Moolenaar <Bram@vim.org>
+" Last change:	2019 Dec 17
+"
+" To use it, copy it to
+"	       for Unix:  ~/.vimrc
+"	      for Amiga:  s:.vimrc
+"	 for MS-Windows:  $VIM\_vimrc
+"	      for Haiku:  ~/config/settings/vim/vimrc
+"	    for OpenVMS:  sys$login:.vimrc
+
+" When started as "evim", evim.vim will already have done these settings, bail
+" out.
+
+call plug#begin('~/.vim/plugged')
+Plug 'preservim/nerdcommenter'
+Plug 'chun-yang/auto-pairs'
+Plug 'sirver/ultisnips'
+Plug 'pangloss/vim-javascript'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-fugitive'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php'] }
+Plug 'mattn/emmet-vim'
+Plug 'morhetz/gruvbox'
+call plug#end()
+
+" Plug 'nikvdp/ejs-syntax'
+" Plug 'briancollins/vim-jst'
+
+if v:progname =~? "evim"
+  finish
+endif
+
+" Get the defaults that most users want.
+source $VIMRUNTIME/defaults.vim
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file (restore to previous version)
+  if has('persistent_undo')
+    set undofile	" keep an undo file (undo changes after closing)
+  endif
+endif
+
+if &t_Co > 2 || has("gui_running")
+  " Switch on highlighting the last used search pattern.
+  set hlsearch
+endif
+
+" Put these in an autocmd group, so that we can delete them easily.
+augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+augroup END
+
+" Add optional packages.
+"
+" The matchit plugin makes the % command work better, but it is not backwards
+" compatible.
+" The ! means the package won't be loaded right away but when plugins are
+" loaded during initialization.
+if has('syntax') && has('eval')
+  packadd! matchit
+endif
+
+
+" --- Plugin Config ---
+"
+" --Airline--
+let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ''
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_theme='base16_gruvbox_dark_hard'
+let g:airline_powerline_fonts = 1
+
+" --NERDTree--
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+" Open the existing NERDTree on each new tab.
+" autocmd BufWinEnter * silent NERDTreeMirror
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+	\ quit | endif
+" let g:NERDTreeDirArrowExpandable = ' '
+let g:NERDTreeDirArrowExpandable = ''
+" let g:NERDTreeDirArrowCollapsible = ' '
+let g:NERDTreeDirArrowCollapsible = ''
+" Start NERDTree and leave the cursor in it.
+" autocmd VimEnter * NERDTree | wincmd p
+" let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+set encoding=UTF-8
+
+
+" -- Theme Gruvbox --
+" set background=dark
+" set termguicolors
+" let g:gruvbox_transparent_bg = 1
+" let g:gruvbox_italic = 1
+" let g:gruvbox_termcolors = 16
+" let g:gruvbox_contrast_dark = 1
+" " let g:gruvbox_improved_strings = 1
+" let g:gruvbox_improved_warnings = 1
+" let g:gruvbox_contrast_dark = 'soft'
+" autocmd vimenter * ++nested colorscheme gruvbox
+" -- Gruvbox-material --
+if has('termguicolors')
+	set termguicolors
+endif
+set background=dark
+" set background=light
+" Set contrast.
+" This configuration option should be placed before `colorscheme gruvbox-material`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_cursor = 'yellow'
+let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_visual = 'reverse'
+colorscheme gruvbox-material
+" solving termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+
+
+" --NERDCommenter--
+filetype plugin on
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+" Add spaces after comment delimiters by default
+ let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' }, 'ejs': {'left':'<!--', 'right':'--!>'} }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+
+" -- Vim Javascript --
+" let g:javascript_plugin_jsdoc = 1
+" let g:javascript_plugin_ngdoc = 1
+" let g:javascript_conceal_function             = "ƒ"
+" let g:javascript_conceal_null                 = "ø"
+" let g:javascript_conceal_this                 = "@"
+" let g:javascript_conceal_return               = "⇚"
+" let g:javascript_conceal_undefined            = "¿"
+" let g:javascript_conceal_NaN                  = "ℕ"
+" let g:javascript_conceal_prototype            = "¶"
+" let g:javascript_conceal_static               = "•"
+" let g:javascript_conceal_super                = "Ω"
+" let g:javascript_conceal_arrow_function       = "⇒"
+" let g:javascript_conceal_noarg_arrow_function = "🞅"
+" let g:javascript_conceal_underscore_arrow_function = "🞅"
+" let g:javascript_plugin_flow = 1
+" set conceallevel=1
+" augroup javascript_folding
+"        au!
+"     au FileType javascript setlocal foldmethod=syntax
+" augroup END
+
+" -- Snippets --
+set runtimepath+=~/.vim/ultisnips_rep
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" -- Vim-prettier --
+au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
+let g:prettier#exec_cmd_async = 1
+
+" -- Vim Devicons --
+let g:DevIconsEnableFoldersOpenClose = 1
+
+
+" --- My config ---
+set number
+set relativenumber
+syntax on
+set laststatus=2
+set showtabline=2
+set tabstop=4
+set numberwidth=4
+set shiftwidth=4
+set t_Co=256
+set mouse=a
+set pastetoggle=<F3>
+filetype on
+set nu
+set ruler
+" set list
+" vnoremap <C-c> :w !xclip -selection clipboard<CR>
+vmap <C-c> :w !xclip -selection clipboard<CR>
+" Paksa save jika butuh sudo
+cnoremap w!! w !sudo tee > /dev/null % 
+" Navigasi vim
+" nmap <silent> <c-k> :wincmd k<CR>
+" nmap <silent> <c-j> :wincmd j<CR>
+" nmap <silent> <c-h> :wincmd h<CR>
+" nmap <silent> <c-l> :wincmd l<CR>
+nnoremap gh <C-W><C-H>
+nnoremap gj <C-W><C-J>
+nnoremap gk <C-W><C-K>
+nnoremap gl <C-W><C-L>
+nmap <silent> <C-h> :vertical resize -3<CR>
+nmap <silent> <C-l> :vertical resize +3<CR>
+nmap <silent> <C-k> :res +3<CR>
+nmap <silent> <C-j> :res -3<CR>
+" inoremap <C-h> <Esc>ha
+inoremap <C-j> <Esc>o
+inoremap <C-k> <Esc>O
+inoremap <C-l> <Esc>la
+" nmap <silent> <C-[> <C-w><
+" nmap <silent> <C-]> <C-w>>
+au BufNewFile,BufRead *.ejs set filetype=html
+

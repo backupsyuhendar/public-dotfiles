@@ -1,1 +1,7 @@
-/home/dar729/.local/bin/scrot-me
+#!/bin/sh
+
+dirFile='~/Gambar/scrot/'
+scrot -e 'mv $f ~/Gambar/scrot/$f && xclip -t image/png ~/Gambar/scrot/$f -sel clip'; 
+dunstify --replace=3 "Screenshot disimpan di $dirFile";
+paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga;
+

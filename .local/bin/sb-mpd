@@ -1,1 +1,47 @@
-/home/dar729/.local/bin/sb-mpd
+#!/bin/sh
+
+# PREFIX_PLAY=' '
+iconMusic=' '
+iconStatus=''
+song="$(playerctl metadata title | cut -b -15)..."
+sts="$(playerctl status)"
+
+if [[ "$sts" = "Paused" ]]; then
+	iconStatus=''
+else
+	iconStatus='奈'
+fi
+
+if [[ "$song" = "" ]]; then
+	echo ""
+	exit 0
+else
+	# echo " $iconMusic$song $iconStatus"
+	echo " $iconMusic$song"
+	# echo " $iconMusic$song"
+fi
+
+# 奈
+
+
+# get_mpd()
+# {
+#     current_song="$(mpc current)"
+#
+#     if [[ "$current_song" = ""  ]]; then
+#         echo " "
+#         exit 0
+#     else
+#         playpause=$(mpc | awk '/\[.*]/{split($0, a, " "); print a[1]}')
+#         if [[ "$playpause" = "[playing]"  ]]; then
+#             current_song="$PREFIX_PLAY $current_song"
+#         elif [[ "$playpause" = "[paused]"  ]]; then
+#             current_song="$PREFIX_PAUSE $current_song"
+#         fi
+#     fi
+#
+#     echo "$current_song"
+#
+# }
+#
+# get_mpd

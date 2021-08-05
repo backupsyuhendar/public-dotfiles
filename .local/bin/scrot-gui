@@ -1,1 +1,4 @@
-/home/dar729/.local/bin/scrot-gui
+#!/bin/sh
+
+scrot --line style=dash,width=3,color="orange" --select -f -e 'mv $f ~/Gambar/scrot; dunstify "Screenshot disimpan di ~/Gambar/scrot/$f"; paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga; xclip -t image/png ~/Gambar/scrot/$f -sel clip' 
+

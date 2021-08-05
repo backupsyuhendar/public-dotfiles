@@ -1,1 +1,2 @@
-/home/dar729/.local/bin/pacman-up
+#!/bin/sh
+expac -S -H M '%k\t%n' $(pacman -Qqu) | sort -sh
