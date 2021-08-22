@@ -25,6 +25,7 @@ Plug 'prettier/vim-prettier', {
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php'] }
 Plug 'mattn/emmet-vim'
 Plug 'morhetz/gruvbox'
+" Plug 'yggdroot/indentline'
 call plug#end()
 
 " Plug 'nikvdp/ejs-syntax'
@@ -155,7 +156,7 @@ let g:NERDToggleCheckAllLines = 1
 
 
 " -- Vim Javascript --
-" let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_jsdoc = 1
 " let g:javascript_plugin_ngdoc = 1
 " let g:javascript_conceal_function             = "ƒ"
 " let g:javascript_conceal_null                 = "ø"
@@ -190,6 +191,12 @@ let g:prettier#exec_cmd_async = 1
 
 " -- Vim Devicons --
 let g:DevIconsEnableFoldersOpenClose = 1
+
+" -- Indent Line --
+" let g:indenLine_enabled=1
+" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" let g:indentLine_color_term = 239
+
 
 
 " --- My config ---
@@ -232,4 +239,7 @@ inoremap <C-l> <Esc>la
 " nmap <silent> <C-[> <C-w><
 " nmap <silent> <C-]> <C-w>>
 au BufNewFile,BufRead *.ejs set filetype=html
+au BufNewFile,BufRead *.mdx set filetype=markdown
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 
