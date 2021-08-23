@@ -24,12 +24,15 @@ Plug 'prettier/vim-prettier', {
   \ 'do': 'npm install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html', 'php'] }
 Plug 'mattn/emmet-vim'
-Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
 " Plug 'yggdroot/indentline'
-call plug#end()
-
 " Plug 'nikvdp/ejs-syntax'
 " Plug 'briancollins/vim-jst'
+call plug#end()
+
 
 if v:progname =~? "evim"
   finish
@@ -71,16 +74,16 @@ if has('syntax') && has('eval')
 endif
 
 
-" --- Plugin Config ---
+" === Plugin Config ===
 "
-" --Airline--
+" -- vim-airline --
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#left_sep = ''
 " let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_theme='base16_gruvbox_dark_hard'
 let g:airline_powerline_fonts = 1
 
-" --NERDTree--
+" -- nerdtree --
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
@@ -90,15 +93,14 @@ nnoremap <C-f> :NERDTreeFind<CR>
 " Exit Vim if NERDTree is the only window left.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
 	\ quit | endif
-" let g:NERDTreeDirArrowExpandable = ' '
 let g:NERDTreeDirArrowExpandable = ''
-" let g:NERDTreeDirArrowCollapsible = ' '
 let g:NERDTreeDirArrowCollapsible = ''
+let NERDTreeDirArrows = 1
 " Start NERDTree and leave the cursor in it.
 " autocmd VimEnter * NERDTree | wincmd p
 " let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-set encoding=UTF-8
+" let g:NERDTreeDirArrowExpandable = ' '
+" let g:NERDTreeDirArrowCollapsible = ' '
 
 
 " -- Theme Gruvbox --
@@ -133,7 +135,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 
 
-" --NERDCommenter--
+" -- nerdcommenter --
 filetype plugin on
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
@@ -155,7 +157,7 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
 
-" -- Vim Javascript --
+" -- vim-javascript --
 let g:javascript_plugin_jsdoc = 1
 " let g:javascript_plugin_ngdoc = 1
 " let g:javascript_conceal_function             = "ƒ"
@@ -177,7 +179,7 @@ let g:javascript_plugin_jsdoc = 1
 "     au FileType javascript setlocal foldmethod=syntax
 " augroup END
 
-" -- Snippets --
+" -- ultisnips --
 set runtimepath+=~/.vim/ultisnips_rep
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -185,14 +187,14 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
-" -- Vim-prettier --
+" -- vim-prettier --
 au FileType css,scss let b:prettier_exec_cmd = "prettier-stylelint"
 let g:prettier#exec_cmd_async = 1
 
-" -- Vim Devicons --
+" -- vim-devicons --
 let g:DevIconsEnableFoldersOpenClose = 1
 
-" -- Indent Line --
+" -- indentline --
 " let g:indenLine_enabled=1
 " let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " let g:indentLine_color_term = 239
@@ -214,6 +216,7 @@ set pastetoggle=<F3>
 filetype on
 set nu
 set ruler
+set encoding=UTF-8
 " set list
 " vnoremap <C-c> :w !xclip -selection clipboard<CR>
 vmap <C-c> :w !xclip -selection clipboard<CR>

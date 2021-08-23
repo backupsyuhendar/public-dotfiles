@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const { exec, spawn } = require("child_process");
+
+const folderConfig = [
+	"cava",
+	"dmenu",
+	"dmenu-recent",
+	"dunst",
+	"dwmbar",
+	"flameshot",
+	"gtk-2.0",
+	"gtk-3.0",
+	"htop",
+	"konsolerc",
+	"mimeapps.list",
+	"mpv",
+	"ncmpcpp",
+	"neofetch",
+	"nitrogen",
+	"pcmanfm",
+	"picom.conf",
+	"qutebrowser",
+	"ranger",
+	"rofi",
+	"spacefm",
+	"xfce4",
+];
+
+folderConfig.forEach(
+	(cfg) => {
+		exec(
+			`rsync --exclude .git/ -r -v $HOME/.config/${cfg} $HOME/Destop/dotfiles/.config/`,
+			(error, stdout, stderr) => {
+				if (error) {
+					console.error(`exec error: ${error}`);
+					return;
+				}
+				console.log(`stdout: ${stdout}`);
+				console.error(`stderr: ${stderr}`);
+			}
+		);
+	}	
+	// spawn('ls', [`~/.config/${cfg}`] )
+);
+
+
+exec(`rsync --exclude plugged/ -r -v $HOME/.config/nvim $HOME/Destop/dotfiles/.config/`)
