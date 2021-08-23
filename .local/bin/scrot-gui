@@ -1,4 +1,15 @@
-#!/bin/sh
+#!/bin/bash
 
-scrot --line style=dash,width=3,color="orange" --select -f -e 'mv $f ~/Gambar/scrot; dunstify "Screenshot disimpan di ~/Gambar/scrot/$f"; paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga; xclip -t image/png ~/Gambar/scrot/$f -sel clip' 
 
+waktu=$(date +'%d-%m-%Y')
+dir="$HOME/Gambar/scrot/scrot-gui/$waktu"
+dirmv="$HOME/Gambar/scrot/scrot-gui"
+[ ! -d "$dir" ] && mkdir "$dir"
+# dunstify --replace=100 "$dir"
+
+scrot --line style=dash,width=3,color="orange" --select -f -e '\
+	mv $f ~/Gambar/scrot/scrot-gui; dunstify --replace=3 "Screenshot disimpan di ~/Gambar/scrot/scrot-gui"; \ 
+	paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga'
+xclip -t image/png ~/Gambar/scrot/scrot-gui/*.png -sel clip
+# dunstify --replace=3 "Screenshot disimpan di $dir";
+mv $dirmv/*.png $dir

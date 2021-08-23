@@ -18,7 +18,6 @@ if [[ "$song" = "" ]]; then
 else
 	# echo " $iconMusic$song $iconStatus"
 	echo " $iconMusic$song"
-	# echo " $iconMusic$song"
 fi
 
 # 奈

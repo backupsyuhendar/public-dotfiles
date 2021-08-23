@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const { exec, spawn } = require("child_process");
+
+const myscript = [
+	"bright*",
+	"vol*",
+	"sb-*",
+	"pacman-*",
+	"scrot-*",
+	"sinkron-*",
+	"flameshot-imgck"
+];
+
+myscript.forEach(
+	(scr) => {
+		exec(
+			`rsync -v $HOME/.local/bin/${scr} $HOME/Destop/dotfiles/.local/bin`,
+			(error, stdout, stderr) => {
+				if (error) {
+					console.error(`exec error: ${error}`);
+					return;
+				}
+				console.log(`stdout: ${stdout}`);
+				console.error(`stderr: ${stderr}`);
+			}
+		);
+	}	
+	// spawn('ls', [`~/.config/${scr}`] )
+);
+
+
