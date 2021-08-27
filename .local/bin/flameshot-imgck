@@ -20,7 +20,13 @@ color_bg          = '#666666'
 author_position   = ['SouthWest', '+30+26']
 author            = 'Shooter: @ syuhendar729'
 
+
+# scrot --line style=dash,width=3,color="orange" --select -f -e '\
+#     mv $f #{original_file}; dunstify --replace=3 "Screenshot disimpan di ~/Gambar/scrot/scrot-gui"; \
+#     paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga'
+
 %x(
+ 
 flameshot gui --raw > #{original_file}
 
 magick convert #{original_file} -bordercolor '#{color_bg}' -border #{border_size} \
@@ -45,6 +51,8 @@ magick convert #{target_file} -gravity North -background #{background_color} \
 -splice 0x#{background_size.to_i / 2} #{target_file}
 
 magick convert #{target_file} -profile #{color_profile} #{target_file}
+
+paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga
 )
 
 list_file = `ls -p | grep -v /`
@@ -52,6 +60,7 @@ last_file = list_file.split(' ').last
 if last_file.include? 'X'
   `notify-send "ImageMagick" "Improving success!" -t 3000`
   `xclip -selection clipboard -i #{target_file} -t image/png`
+  `rm -rf #{original_file}`
 end
 
 size = `find #{last_file} -printf %s`

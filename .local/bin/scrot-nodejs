@@ -1,29 +1,91 @@
 #!/usr/bin/env node
 
-const dirFile 			= '~/Gambar/scrot/'
-const w					= new Date() 
-const original_file     = `${w.getFullYear()}-${w.getMonth()}-${w.getDate()}-${w.getTime()}`
-//const arget_file        = original_file.split('').insert(-5, 'X').join
-const color_profile     = '/usr/share/color/icc/colord/sRGB.icc'
-const border_size       = '1'
-const background_color  = '"#FFFFFF"'
-const background_size   = '10'
-const shadow_size       = '50x10+0+10'
-const font              = 'Noto-Sans-Mono'
-const font_size         = '11'
-const color_fg          = '#ffffff'
-const color_bg          = '#666666'
-const author_position   = ['SouthWest', '+30+26']
-const author            = 'Shooter: @ syuhendar729'
+const { exec, spawn } = require("child_process");
 
-const execSync = require('child_process').execSync;
-// import { execSync } from 'child_process';  // replace ^ if using ES modules
-// const output = execSync('scrot', { encoding: 'utf-8' });  // the default is 'buffer'
-// console.log('Output was:\n', output);
+// const dirFile 			= '~/Gambar/scrot/'
+// const w					= new Date()
+// const original_file     = `${w.getFullYear()}-${w.getMonth()}-${w.getDate()}-${w.getTime()}`
+const original_file = "/tmp/image.png";
+// const target_file        = original_file.split('').insert(-5, 'X').join
+const target_file = "/tmp/image.png";
+const color_profile = "/usr/share/color/icc/colord/sRGB.icc";
+const border_size = "1";
+const background_color = '"#FFFFFF"';
+const background_size = "10";
+const shadow_size = "50x10+0+10";
+const font = "Noto-Sans-Mono";
+const font_size = "12";
+const color_fg = "#ffffff";
+const color_bg = "#666666";
+const author_position = ["SouthWest", "+30+26"];
+const author = "Shooter: @ syuhendar729";
 
-console.log(original_file)
+// console.log(original_file)
 
-execSync(`
-scrot -e 'mv $f ${dirFile}$f'; dunstify --replace=3 'Screenshot disimpan di ${dirFile}'; \
-paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga;
-`, { encoding: 'utf-8' }); 
+// scrot -e 'mv $f ${dirFile}$f'; dunstify --replace=3 'Screenshot disimpan di ${dirFile}'; \
+
+/* 
+	1. Screeenshot dengan scrot
+
+	2. Buat border
+
+	3. Buat shadow 
+
+	4. Buat background
+
+	5. Tulis author
+
+	6. Perbarui background size  
+
+	7. Perbagus background
+
+
+	*/
+
+exec(
+	`
+
+scrot --line style=dash,width=3,color="orange" --select -f -e '\
+	mv $f ${original_file}; dunstify --replace=3 "Screenshot saved in ${original_file}"; \ 
+	paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga'
+
+magick convert ${original_file} -bordercolor '${color_bg}' -border ${border_size} \
+${target_file}
+
+magick convert ${target_file} \\( +clone -background black \
+-shadow ${shadow_size} \\) +swap -background none \
+-layers merge +repage ${target_file}
+
+magick convert ${target_file} -bordercolor ${background_color} \
+-border ${background_size} ${target_file}
+
+echo -n " ${author} " | magick convert ${target_file} \
+-gravity ${author_position[0]} -pointsize ${font_size} -fill '${color_fg}' \
+-undercolor '${color_bg}' -font ${font} \
+-annotate ${author_position[1]} @- ${target_file}
+
+magick convert ${target_file} -gravity South -chop 0x${
+		background_size.to_i / 2
+	} \
+${target_file}
+
+magick convert ${target_file} -gravity North -background ${background_color} \
+-splice 0x${background_size.to_i / 2} ${target_file}
+
+magick convert ${target_file} -profile ${color_profile} ${target_file}
+`,
+	(error, stdout, stderr) => {
+		// console.log(error)
+		if (error) {
+			console.log(error)
+			return
+		}
+		// exec(`xclip -selection clipboard -i ${target_file} -t image/png`)
+		console.log(stderr)
+		spawn('xclip', ['-selection', 'clipboard', '-i', `${target_file}`, '-t', 'image/png'])
+		spawn('dunstify', ['Convert Success !', '-t', '2000'])
+	}
+);
+
+// spawn('dunstify', ['Wkwkwk'])
+

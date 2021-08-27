@@ -105,6 +105,7 @@ alias yayallbrowse="yay -Slq | fzf --preview 'yay -Si {}' --layout=reverse"
 # service
 alias rchr="sudo systemctl restart chronyd"
 alias hbr="systemctl hibernate"
+alias ochr="sudo chronyc online"
 
 # -- global aliases --
 alias -g gp="grep"
@@ -133,4 +134,12 @@ git-svn(){
 
 npmgi(){
 	npm -g install "$1" --prefix ~/.local
+}
+
+ytdl(){
+	echo 'Masukkan url : '
+	read url 
+	echo 'Kualitas : '
+	read quality
+	youtube-dl "$url" -f "(mp4,webm)bestvideo[height<=$quality]+bestaudio/best[height<=$quality]" -o '%(title)s-%(resolution)s.%(ext)s' 
 }
