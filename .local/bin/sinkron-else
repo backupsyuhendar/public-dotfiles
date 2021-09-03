@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+
+const fs = require("fs");
+const { exec, spawn } = require("child_process");
+
+const myscript = [
+	".vim/UltiSnips"
+];
+
+myscript.forEach(
+	(scr) => {
+		exec(
+			`rsync -r -v $HOME/${scr} $HOME/Destop/dotfiles/${scr}`,
+			(error, stdout, stderr) => {
+				if (error) {
+					console.error(`exec ERROR: ${error}`);
+					return;
+				}
+				console.log(`stdout: ${stdout}`);
+				console.error(`stderr ERROR: ${stderr}`);
+			}
+		);
+	}	
+	// spawn('ls', [`~/.config/${scr}`] )
+);
+
+

@@ -6,6 +6,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'chun-yang/auto-pairs'
 Plug 'tpope/vim-markdown'
+Plug 'sainnhe/gruvbox-material'
 call plug#end()
 
 " ### System Config ###
@@ -48,10 +49,6 @@ endif
 
 " ### Neovim Plugin Config ###
 
-" -- Airline --
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme='base16_gruvbox_dark_hard'
-" let g:airline_powerline_fonts = 1
 
 " -- NERDTree --
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -125,6 +122,21 @@ let g:lightline = {
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
 
 
+" -- gruvbox-material --
+if has('termguicolors')
+	set termguicolors
+endif
+set background=dark
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_enable_bold = 1
+let g:gruvbox_material_cursor = 'yellow'
+let g:gruvbox_material_transparent_background = 1
+let g:gruvbox_material_visual = 'reverse'
+colorscheme gruvbox-material
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " solving termguicolors
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " solving termguicolors
+
+
 
 
 " ### My config ###
@@ -169,7 +181,7 @@ inoremap <C-l> <Esc>la
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.mdx set filetype=markdown
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-colorscheme peachpuff
+" colorscheme peachpuff
 " -- remember last line open --
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif

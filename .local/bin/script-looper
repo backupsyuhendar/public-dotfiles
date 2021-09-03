@@ -1,0 +1,8 @@
+#!/bin/bash
+for i in *.mp3;
+	# do touch "$i.bak"
+	do name=`echo "$i" | cut -d'.' -f1`
+	echo "\033[0;31m$name"
+	# ffmpeg -i "$i" -codec:a libmp3lame -qscale:a 2 "mp3/$name.mp3"
+	ffmpeg -i "$i" -metadata title="$name" -c copy "done/$name.mp3" 
+done;

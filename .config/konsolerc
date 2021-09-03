@@ -13,7 +13,7 @@ ShowMenuBarByDefault=false
 
 [MainWindow]
 LVDS1 Height 1366x768=726
-LVDS1 Width 1366x768=1348
+LVDS1 Width 1366x768=740
 LVDS1 XPosition 1366x768=9
 LVDS1 YPosition 1366x768=33
 MenuBar=Disabled

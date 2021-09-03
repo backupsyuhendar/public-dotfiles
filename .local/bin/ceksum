@@ -1,0 +1,16 @@
+#!/bin/bash
+
+echo 'Masukkan sum iso :'
+
+read sumIso
+
+echo 'Masukkan sum asli : '
+
+read sumAsli
+
+if [ "$sumAsli" == "$sumIso" ] ; then
+	echo 'Benar'
+else 
+	echo 'Salah'
+fi
+

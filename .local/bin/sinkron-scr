@@ -10,7 +10,14 @@ const myscript = [
 	"pacman-*",
 	"scrot-*",
 	"sinkron-*",
-	"flameshot-imgck"
+	"flameshot-imgck",
+	"git-*",
+	"modemgw",
+	"apd",
+	"waktu",
+	"ceksum",
+	"HDSentinel",
+	"script-looper",
 ];
 
 myscript.forEach(

@@ -20,7 +20,7 @@ application/pdf=epdfview.desktop
 application/x-bittorrent=deluge.desktop
 application/wps-office.docx=freeoffice-textmaker.desktop
 image/gif=viewnior.desktop
-x-scheme-handler/tg=telegramdesktop.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-970Z80.desktop
 application/x-xdg-protocol-tg=telegramdesktop.desktop
 x-scheme-handler/webcal=brave-browser.desktop
 
@@ -45,5 +45,5 @@ application/pdf=epdfview.desktop;org.kde.okular.desktop;
 application/x-bittorrent=deluge.desktop;
 application/wps-office.docx=freeoffice-textmaker.desktop;
 image/gif=sublime_text.desktop;viewnior.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-98D750.desktop;userapp-Telegram Desktop-EBQE60.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-98D750.desktop;userapp-Telegram Desktop-970Z80.desktop;
 image/webp=viewnior.desktop;

@@ -69,7 +69,7 @@ alias lc="cd ~/.local"
 alias gh="cd ~/.gh"
 alias cst="cd ~/.suckless/my-st"
 alias cdwm="cd ~/.suckless/my-dwm"
-alias bjs="cd ~/MyProgram/JavaScript/js-advanced/"
+alias bjs="cd ~/MyProgram/JavaScript/"
 alias suck="cd ~/.suckless"
 alias srv="cd /srv/http"
 alias lcb="cd ~/.local/bin"
@@ -124,11 +124,11 @@ srcman() {
 
 git-svn(){
   if [[ ! -z "$1" && ! -z "$2" ]]; then
-          echo "Starting clone/copy ..."
-          repo=$(echo $1 | sed 's/\/$\|.git$//')
-          svn export "$repo/trunk/$2"
+    echo "Starting clone/copy ..."
+    repo=$(echo $1 | sed 's/\/$\|.git$//')
+    svn export "$repo/trunk/$2"
   else
-          echo "Use: git-svn <repository> <subdirectory>"
+    echo "Use: git-svn <repository> <subdirectory>"
   fi
 }
 
@@ -143,3 +143,6 @@ ytdl(){
 	read quality
 	youtube-dl "$url" -f "(mp4,webm)bestvideo[height<=$quality]+bestaudio/best[height<=$quality]" -o '%(title)s-%(resolution)s.%(ext)s' 
 }
+
+# Solved glsl version alacritty not support
+# export LIBGL_ALWAYS_SOFTWARE=1 alacritty

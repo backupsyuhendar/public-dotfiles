@@ -1,0 +1,8 @@
+#!/bin/php
+<?php
+date_default_timezone_set("UTC");
+date_default_timezone_set("Asia/Jakarta");
+$time = time();
+$waktu = date("l, d-M-Y", $time);
+echo "$waktu \n";
+?>

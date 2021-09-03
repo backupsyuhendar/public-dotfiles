@@ -1,0 +1,6 @@
+#!/bin/bash
+# sudo eject /dev/sr1
+sleep 2
+sudo modprobe usbserial vendor=0X05c6 product=0X6000
+sleep 2
+sudo wvdial three

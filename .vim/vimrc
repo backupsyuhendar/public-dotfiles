@@ -29,6 +29,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-markdown'
+" Plug 'ashisha/image.vim'
 " Plug 'yggdroot/indentline'
 " Plug 'nikvdp/ejs-syntax'
 " Plug 'briancollins/vim-jst'
@@ -89,7 +90,7 @@ let g:airline_powerline_fonts = 1
 
 " -- nerdtree --
 nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
+" nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 let g:NERDTreeDirArrowExpandable = ''
@@ -232,6 +233,7 @@ nnoremap gh <C-W><C-H>
 nnoremap gj <C-W><C-J>
 nnoremap gk <C-W><C-K>
 nnoremap gl <C-W><C-L>
+nnoremap <C-n> :nohlsearch<CR>
 nmap <silent> <C-h> :vertical resize -3<CR>
 nmap <silent> <C-l> :vertical resize +3<CR>
 nmap <silent> <C-k> :res +3<CR>
@@ -253,4 +255,5 @@ set omnifunc=javascriptcomplete#CompleteJS
 " inoremap <C-h> <Esc>ha
 " nmap <silent> <C-[> <C-w><
 " nmap <silent> <C-]> <C-w>>
+" au BufRead *.png,*.jpg,*.jpeg :call DisplayImage()
 
