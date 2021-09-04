@@ -22,14 +22,6 @@ src/
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
 
-# KDE directory preferences
-.directory
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
 
 ### C ###
 # Prerequisites
@@ -88,80 +80,10 @@ dkms.conf
 # End of https://www.toptal.com/developers/gitignore/api/archlinuxpackages,linux,c
 
 # == My config ==
-# Folder Biasa
-Destop/
-Dokumen/
-Gambar/
-Musik/
-MyProgram/
-Publik/
-SoftMaker/
-Templat/
-Unduhan/
-Video/
-
-Desktop/
-Documents/
-Pictures/
-Music/
-Public/
-Template/
-Downloads/
-Videos/
-VirtualBox VMs/
-
-
-# Folder hidden
-.aur/
-.cache/
-.fltk/
-.gh/
-.gimp-2.8/
-.gnome/
-.hplip/
-.moc/
-.moonchild\ productions/
-.mozilla/
-.npm/
-.pki/
-.ssh/
-.subversion/
-.terminfo/
-.tailwindcss/
-.zoom/
-.git/
-.local/share/
-.config/chromium/
-.vim/plugged/
-.local/lib/
-.config/GIMP/
-.config/sublime-text/
-!.config/sublime-text/Packages/User/
-.ssr/logs/
-.suckless/
-.powerlevel10k/
-.local/bin/vnc*
-.local/bin/Xvnc*
-.config/BraveSoftware/
-.config/MongoDB Compass/
-.config/VirtualBox/
-.local/bin/HD*
- 
-
 
 # File dotfiles
 Telegram
 Updater
-.NERDTreeBookmarks
-.Xauthority
-.Xclients
-.png
-.xsession-errors
-.xsession-errors.old
-.viminfo
-.wget-hsts
-.zcompdump
-.lesshst
-.makepkg.conf
-.python_history
-.node_repl_history
+# dwm, st,and other suckless
+dwm
+st
