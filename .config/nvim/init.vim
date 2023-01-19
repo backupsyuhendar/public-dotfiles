@@ -7,6 +7,9 @@ Plug 'preservim/nerdtree'
 Plug 'chun-yang/auto-pairs'
 Plug 'tpope/vim-markdown'
 Plug 'sainnhe/gruvbox-material'
+Plug 'sirver/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 " ### System Config ###
@@ -137,6 +140,21 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " solving termguicolors
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " solving termguicolors
 
 
+" ### UlstiSnips ###
+
+" Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
+" - https://github.com/Valloric/YouCompleteMe
+" - https://github.com/nvim-lua/completion-nvim
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+" directory 
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
+
+
 
 
 " ### My config ###
@@ -160,6 +178,8 @@ set textwidth=0
 set wrapmargin=1
 set formatoptions+=t
 set formatoptions-=l
+set nobackup
+set nowritebackup
 " -- 
 set noshowmode
 " -- copy to clipboard system --
@@ -175,6 +195,7 @@ nmap <silent> <C-h> :vertical resize -3<CR>
 nmap <silent> <C-l> :vertical resize +3<CR>
 nmap <silent> <C-k> :res +3<CR>
 nmap <silent> <C-j> :res -3<CR>
+nmap <C-s> :write<CR>
 inoremap <C-j> <Esc>o
 inoremap <C-k> <Esc>O
 inoremap <C-l> <Esc>la
@@ -186,7 +207,13 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
+" Add Line Indentation
+" set list lcs=tab:\|\
+" set list lcs=tab:\┆\
+set list lcs=tab:\¦\ 
 
 " ctrl + d => down
 " ctrl + u => up
+
+
 
