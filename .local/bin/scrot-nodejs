@@ -2,11 +2,7 @@
 
 const { exec, spawn } = require("child_process");
 
-// const dirFile 			= '~/Gambar/scrot/'
-// const w					= new Date()
-// const original_file     = `${w.getFullYear()}-${w.getMonth()}-${w.getDate()}-${w.getTime()}`
 const original_file = "/tmp/image.png";
-// const target_file        = original_file.split('').insert(-5, 'X').join
 const target_file = "/tmp/image.png";
 const color_profile = "/usr/share/color/icc/colord/sRGB.icc";
 const border_size = "1";
@@ -18,7 +14,13 @@ const font_size = "12";
 const color_fg = "#ffffff";
 const color_bg = "#666666";
 const author_position = ["SouthWest", "+30+26"];
-const author = "Shooter: @ syuhendar729";
+const author = "Shooter: @ syuhendar";
+
+
+// const dirFile 			= '~/Gambar/scrot/'
+// const w					= new Date()
+// const original_file     = `${w.getFullYear()}-${w.getMonth()}-${w.getDate()}-${w.getTime()}`
+// const target_file        = original_file.split('').insert(-5, 'X').join
 
 // console.log(original_file)
 
