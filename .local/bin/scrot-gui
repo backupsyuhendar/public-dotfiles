@@ -11,5 +11,5 @@ scrot --line style=dash,width=3,color="orange" --select -f -e '\
 	mv $f ~/Pictures/scrot/scrot-gui; dunstify --replace=3 "Screenshot disimpan di ~/Pictures/scrot/scrot-gui"; \ 
 	paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga'
 xclip -t image/png ~/Pictures/scrot/scrot-gui/*.png -sel clip
-# dunstify --replace=3 "Screenshot disimpan di $dir";
+notify-send --replace-id=3 "Screenshot disimpan di $dir";
 mv $dirmv/*.png $dir

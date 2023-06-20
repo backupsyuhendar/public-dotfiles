@@ -9,7 +9,7 @@ const border_size = "1";
 const background_color = '"#FFFFFF"';
 const background_size = "10";
 const shadow_size = "50x10+0+10";
-const font = "Noto-Sans-Mono";
+const font = "Ubuntu-Mono";
 const font_size = "12";
 const color_fg = "#ffffff";
 const color_bg = "#666666";
@@ -85,7 +85,7 @@ magick convert ${target_file} -profile ${color_profile} ${target_file}
 		// exec(`xclip -selection clipboard -i ${target_file} -t image/png`)
 		console.log(stderr)
 		spawn('xclip', ['-selection', 'clipboard', '-i', `${target_file}`, '-t', 'image/png'])
-		spawn('dunstify', ['Convert Success !', '-t', '2000'])
+		spawn('notify-send', ['Convert Success !', '-t', '2000'])
 	}
 );
 

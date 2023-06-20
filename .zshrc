@@ -215,7 +215,7 @@ comp(){
 # export LIBGL_ALWAYS_SOFTWARE=1 alacritty
 # LS_COLORS=$LS_COLORS:'ow=1;34:' ; export LS_COLORS
 
-# Set up Node Version Manager
+# Set up Node Version Manager (buat di .xprofile saja)
 # source /usr/share/nvm/init-nvm.sh
 
 

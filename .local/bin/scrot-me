@@ -2,6 +2,6 @@
 
 dirFile='~/Pictures/scrot/scrot-me'
 scrot -e 'mv $f ~/Pictures/scrot/scrot-me/$f && xclip -t image/png ~/Pictures/scrot/scrot-me/$f -sel clip'; 
-dunstify --replace=3 "Screenshot disimpan di $dirFile";
+notify-send --replace-id=3 "Screenshot disimpan di $dirFile";
 paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga;
 
