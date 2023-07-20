@@ -2,7 +2,7 @@
 call plug#begin()
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 Plug 'preservim/nerdcommenter'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'preservim/nerdtree'
 Plug 'chun-yang/auto-pairs'
 Plug 'tpope/vim-markdown'
@@ -10,14 +10,26 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'pangloss/vim-javascript'
-Plug 'jamespeapen/Nvim-R'
-" Plug 'nvim-tree/nvim-web-devicons'
+" Plug 'jamespeapen/Nvim-R'
 Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons' 
+Plug 'ellisonleao/gruvbox.nvim'
+Plug 'lambdalisue/suda.vim'
+Plug 'nono/vim-handlebars'
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 call plug#end()
 
-" ### System Config ###
+" ### Lua Config ###
+lua require('mylua.gruvbox')
+lua require('mylua.coc')
+lua require('mylua.treesitter')
+lua require('mylua.lualine')
+lua require("toggleterm").setup()
 
-" Get the defaults that most users want.
+
+" ### System Config ###
 " source /usr/share/nvim/archlinux.vim
 
 if has("vms")
@@ -28,26 +40,13 @@ else
     set undofile	" keep an undo file (undo changes after closing)
   endif
 endif
-
 if &t_Co > 2 || has("gui_running")
-  " Switch on highlighting the last used search pattern.
   set hlsearch
 endif
-
-" Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
   au!
-
-  " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
 augroup END
-
-" Add optional packages.
-"
-" The matchit plugin makes the % command work better, but it is not backwards
-" compatible.
-" The ! means the package won't be loaded right away but when plugins are
-" loaded during initialization.
 if has('syntax') && has('eval')
   packadd! matchit
 endif
@@ -55,14 +54,11 @@ endif
 
 " ### Neovim Plugin Config ###
 
-
 " -- NERDTree --
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
-" let g:NERDTreeDirArrowExpandable = ' '
-" let g:NERDTreeDirArrowCollapsible = ' '
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 let NERDTreeDirArrows = 1
@@ -70,42 +66,15 @@ let NERDTreeStatusline="%{matchstr(getline('.'), '\\s\\zs\\w\\(.*\\)')}"
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
 	\ quit | endif
 augroup NERD
-    au!
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-    autocmd VimEnter * wincmd p
-    autocmd VimEnter * call lightline#update()
+	au!
+	autocmd StdinReadPre * let s:std_in=1
+	autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+	autocmd VimEnter * wincmd p
 augroup END
 
-" -- Nvim Treesitter --
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  highlight = {
-    enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
-  indent = {
-    enable = true
-  }
-}
-EOF
-" set foldmethod=expr
-" set foldexpr=nvim_treesitter#foldexpr()
 
 
-" -- NERDCommenter --
+" --- NERDCommenter ---
 filetype plugin on
 let g:NERDCreateDefaultMappings = 1
 let g:NERDSpaceDelims = 1
@@ -117,57 +86,23 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 
-" -- Lightline --
-let g:lightline = {
-		\ 'colorscheme': 'wombat',
-		\ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
-		\ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" },
-      \ }
-		" \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
-		" \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
 
-" -- Vim Markdown --
-let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript']
-
-
-" -- gruvbox-material --
-if has('termguicolors')
-	set termguicolors
-endif
-set background=dark
-let g:gruvbox_material_background = 'soft'
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_cursor = 'yellow'
-let g:gruvbox_material_transparent_background = 1
-let g:gruvbox_material_visual = 'reverse'
-colorscheme gruvbox-material
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " solving termguicolors
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " solving termguicolors
-
-
-" ### UlstiSnips ###
+" --- UlstiSnips ---
 
 " Trigger configuration. You need to change this to something other than <tab> if you use one of the following:
 " - https://github.com/Valloric/YouCompleteMe
 " - https://github.com/nvim-lua/completion-nvim
+" - :UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-" directory 
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
-
-
-" NVIM WEB DEVICONS
-
-
 
 
 " ### My config ###
 set number
-" set relativenumber
+set relativenumber
 syntax on
 set laststatus=2
 set showtabline=2
@@ -182,18 +117,16 @@ set nu
 set ruler
 set encoding=UTF-8
 " -- auto wrapping to new line --
-set textwidth=0
-set wrapmargin=1
-set formatoptions+=t
-set formatoptions-=l
+" set textwidth=0
+" set wrapmargin=1
+" set formatoptions+=t
+" set formatoptions-=l
 set nobackup
 set nowritebackup
-" -- 
 set noshowmode
+" -- 
 " -- copy to clipboard system --
-vmap <C-c> :w !xclip -selection clipboard<CR>
-" -- paksa save jika butuh sudo --
-cnoremap w!! w !sudo tee > /dev/null % 
+" vmap <C-c> :w !xclip -selection clipboard<CR>
 " -- navigasi vim --
 nnoremap gh <C-W><C-H>
 nnoremap gj <C-W><C-J>
@@ -219,6 +152,8 @@ endif
 " set list lcs=tab:\|\
 " set list lcs=tab:\┆\
 set list lcs=tab:\¦\ 
+" Buat neovim bisa copy paste ke clipboard system with 'y' and 'p'
+set clipboard+=unnamedplus
 
 " ctrl + d => down
 " ctrl + u => up

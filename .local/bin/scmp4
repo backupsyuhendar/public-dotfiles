@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# folder tempat file berada
+folder_path="."
+
+# loop melalui setiap file dalam folder
+for input_file in "$folder_path"/*.MP4
+do
+	# cek apakah file merupakan file video dengan ekstensi .MP4
+	if [[ -f "$input_file" ]] && [[ "${input_file##*.}" == "MP4" ]]; then
+		output_file="${input_file%.*}_compr.MP4"
+
+		# cek apakah folder sudah ada file tersebut
+		if [[ -f "compr/$output_file" ]]; then
+    		echo "File sudah ada di dalam folder."
+		else
+			# menjalankan perintah ffmpeg untuk mengonversi file
+			ffmpeg -i "$input_file" -vcodec libx265 -crf 28 "compr/$output_file"
+		fi
+	fi
+done
+# shutdown now

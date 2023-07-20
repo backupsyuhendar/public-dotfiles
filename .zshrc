@@ -73,11 +73,11 @@ alias ga='git add'
 alias gc='git commit -m'
 alias gp='git push origin master'
 alias ls="ls --color=auto"
+alias gitreset="git reset HEAD~1"
 # My alias
 alias cls="clear"
 alias nf="neofetch"
 alias ntr="vim -c NERDTree"
-alias sn="shutdown now"
 alias rswapvim="rm $HOME/.cache/vim/swap/*"
 alias rswapnvim="rm $HOME/.local/state/nvim/swap/*"
 alias mc="musikcube"
@@ -107,6 +107,7 @@ alias prk="cd ~/MyProgram/belajar-cpp/PraktikumAlpro"
 alias tm="tmux -2"
 alias alpro="cd ~/MyProgram/belajar-cpp/Alpro2"
 alias asulah="cd ~/MyProgram/blog-pelampiasan/"
+alias brs="cd ~/MyProgram/belajar-rust"
 #git
 alias gr="git log --all --decorate --oneline --graph"
 alias gts="git status"
@@ -115,8 +116,8 @@ alias cpc="cp config.def.h config.h"
 alias mci="make clean install"
 alias xrx="xrdb ~/.Xresources"
 # docker
-alias dcstart="sudo systemctl start docker"
-alias dcstop="sudo systemctl stop docker"
+# alias dcstart="sudo systemctl start docker"
+# alias dcstop="sudo systemctl stop docker"
 alias dcstatus="systemctl status docker"
 alias dcimg="docker images"
 alias dcls="docker container ls"
@@ -138,6 +139,10 @@ alias yayallbrowse="yay -Slq | fzf --preview 'yay -Si {}' --layout=reverse"
 alias rchr="sudo systemctl restart chronyd"
 alias hbr="systemctl hibernate"
 alias ochr="sudo chronyc online"
+# du 
+alias dush="du -sh */ | sort -n"
+alias dudot="du -sh .*/ | sort -n"
+alias duall="du -sh */ .*/ | sort -n"
 
 # -- global aliases --
 alias -g gp="grep"
@@ -147,19 +152,20 @@ alias -s txt=nvim
 alias -s js=nvim
 alias -s py=nvim
 alias -s json=nvim
+alias -s rs=nvim
 
 # archcraft
 alias btr="acpi -b"
 alias png="ping -c 5 google.com"
 alias srvgem="ssh admin@103.172.204.225"
 alias scr="~/Downloads/scrivano/Scrivano.sh"
+# cargo
+alias crb="cargo build"
+alias crw="RUSTFLAGS=-Awarnings cargo run"
+alias cr="RUSTFLAGS=-Awarnings cargo run --quiet"
+
 
 # -- param alias --
-srcman() {
-	man $1 | grep -- $2
-}
-
-
 git-svn(){
   if [[ ! -z "$1" && ! -z "$2" ]]; then
     echo "Starting clone/copy ..."
@@ -170,16 +176,14 @@ git-svn(){
   fi
 }
 
-npmgi(){
-	npm -g install "$1" --prefix ~/.local
-}
+npmgi() npm -g install "$1" --prefix ~/.local
 
 ytdl(){
 	echo 'Masukkan url : '
 	read url 
-	echo 'Kualitas : '
+	echo 'Kualitas : (ex: 480)'
 	read quality
-	youtube-dl "$url" -f "(mp4,webm)bestvideo[height<=$quality]+bestaudio/best[height<=$quality]" -o '%(title)s-%(resolution)s.%(ext)s' 
+	youtube-dl --verbose "$url" -f "(mp4,webm)bestvideo[height<=$quality]+bestaudio/best[height<=$quality]" -o '%(title)s-%(resolution)s.%(ext)s' 
 }
 
 cmp(){
@@ -187,26 +191,28 @@ cmp(){
     g++ $1 -o $NamaFile;
 	./$NamaFile;
 }
-c(){
-	./$1;
-}
+c() ./$1;
 
-nmc(){
-	cd /etc/NetworkManager/system-connections
-}
+nmc() cd /etc/NetworkManager/system-connections
 
 rec(){
-	ffmpeg -f x11grab -video_size 1366x768 -framerate 25 -i $DISPLAY -c:v libx264 -preset ultrafast -c:a aac $HOME/Video/ffmpeg/$1.mp4
+	ffmpeg -f x11grab -video_size 1366x768 -framerate 25 -i $DISPLAY -c:v libx264 -preset ultrafast -c:a aac $HOME/Videos/ffmpeg/$1.mp4
 }
 
 recaud(){
 	# namaFile=$(vared -p 'Masukkan Nama File : ' -c tmp)
-	ffmpeg -f x11grab -video_size 1366x768 -framerate 25 -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac $HOME/Video/ffmpeg/$1.mp4
+	ffmpeg -f x11grab -video_size 1366x768 -framerate 25 -i $DISPLAY -f alsa -i default -c:v libx264 -preset ultrafast -c:a aac $HOME/Videos/ffmpeg/$1.mp4
 }
 
-comp(){
-	ffmpeg -i $1 -vcodec libx265 -crf 28 $2
-}
+comp() ffmpeg -i $1 -vcodec libx265 -crf 28 $2
+
+# Docker Param Alias
+# $1 = nama container
+dcstart() docker container start $1
+dcstop() docker container stop $1
+dcshell() docker exec -it $1 /bin/bash
+
+sn() sudo openrc-shutdown --poweroff $1
 
 # convert(){
 #
@@ -216,7 +222,7 @@ comp(){
 # LS_COLORS=$LS_COLORS:'ow=1;34:' ; export LS_COLORS
 
 # Set up Node Version Manager (buat di .xprofile saja)
-# source /usr/share/nvm/init-nvm.sh
+source /usr/share/nvm/init-nvm.sh
 
 
 # export LC_ALL=en_US.UTF-8
@@ -244,4 +250,8 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 #     zle -N down-line-or-beginning-search
 #     bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 # fi
+
+# just-js
+export JUST_HOME=$(pwd)/just
+export JUST_TARGET=$JUST_HOME
 
