@@ -7,7 +7,7 @@ Plug 'preservim/nerdtree'
 Plug 'chun-yang/auto-pairs'
 Plug 'tpope/vim-markdown'
 Plug 'sainnhe/gruvbox-material'
-Plug 'sirver/ultisnips'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'pangloss/vim-javascript'
 " Plug 'jamespeapen/Nvim-R'
@@ -95,9 +95,14 @@ let g:NERDToggleCheckAllLines = 1
 " - :UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsExpandTrigger = '(\|\.\|:\|<tab>)'
+" let g:UltiSnipsJumpForwardTrigger = '(\|\.\|:\|<c-b>)'
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/nvim/UltiSnips']
+" Set UltiSnips expand trigger to include '('
+" Set UltiSnips jump forward trigger to include '('
+
 
 
 " ### My config ###
@@ -143,7 +148,7 @@ inoremap <C-l> <Esc>la
 au BufNewFile,BufRead *.ejs set filetype=html
 au BufNewFile,BufRead *.mdx set filetype=markdown
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-" colorscheme peachpuff
+" colorscheme gruvbox-material
 " -- remember last line open --
 if has("autocmd")
   au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -154,6 +159,11 @@ endif
 set list lcs=tab:\¦\ 
 " Buat neovim bisa copy paste ke clipboard system with 'y' and 'p'
 set clipboard+=unnamedplus
+set smartindent
+set autoindent
+" inoremap <Tab> <C-p>
+
+
 
 " ctrl + d => down
 " ctrl + u => up

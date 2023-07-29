@@ -108,6 +108,7 @@ alias tm="tmux -2"
 alias alpro="cd ~/MyProgram/belajar-cpp/Alpro2"
 alias asulah="cd ~/MyProgram/blog-pelampiasan/"
 alias brs="cd ~/MyProgram/belajar-rust"
+alias goncengan="cd ~/MyProgram/goncengan/be-goncengan"
 #git
 alias gr="git log --all --decorate --oneline --graph"
 alias gts="git status"
